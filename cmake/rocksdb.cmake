@@ -5,7 +5,7 @@ include(FetchContent)
 FetchContent_Declare(
     rocksdb
     GIT_REPOSITORY https://github.com/facebook/rocksdb.git
-    GIT_TAG v7.9.2
+    GIT_TAG v7.6.0
     GIT_SHALLOW TRUE
 )
 

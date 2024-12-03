@@ -5,6 +5,6 @@
 # https://stackoverflow.com/a/7725055
 
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -B ./build_release &&
-    make -j16 -C ./build_release --silent &&
+        make -j$(nproc) -C ./build_release &&
     # Congratulate the user!
     echo 'Congrats, UCSB is ready for use!'
