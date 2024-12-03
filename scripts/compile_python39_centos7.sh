@@ -16,6 +16,9 @@ COMPILE_SWIG(){
 
         echo "add /usr/local/bin to \$PATH and /usr/local/lib to \$LD_LIBRARY_PATH in bashrc and source it"
         echo "check swig installation using swig -version"
+
+        echo "export PATH=/usr/local/bin:\$PATH" >> ~/.bashrc
+        echo "export LD_LIBRARY_PATH=/usr/local/lib:\$LD_LIBRARY_PATH" >> ~/.bashrc
 }
 
 
@@ -24,7 +27,7 @@ COMPILE_PYTHON39(){
         wget https://www.python.org/ftp/python/3.9.9/Python-3.9.9.tgz
         tar -xf Python-3.9.9.tgz
 
-        pushd PYTHON-3.9.9
+        pushd Python-3.9.9
 
         CFLAGS="-fPIC" ./configure --enable-shared --prefix=/usr/local --enable-optimizations
         make -j$(nproc)
@@ -37,10 +40,11 @@ COMPILE_PYTHON39(){
 
 ##CHECK GCC version 
 
-mkdir ./pkgs_compiled
+mkdir -p ./pkgs_compiled
 
 pushd pkgs_compiled
 
 COMPILE_SWIG
+COMPILE_PYTHON39
 
 popd
