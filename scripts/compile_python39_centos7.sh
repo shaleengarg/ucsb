@@ -1,11 +1,12 @@
 #!/bin/bash
 
 set -e
+set -x
 
 COMPILE_SWIG(){
         sudo yum install -y pcre2-devel
         wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz -O swig.tar.gz
-        
+
         tar -xf swig.tar.gz
         pushd ./swig-4.1.1
         ./autogen.sh
@@ -29,6 +30,8 @@ COMPILE_PYTHON39(){
 
         pushd Python-3.9.9
 
+        make clean -j
+
         CFLAGS="-fPIC" ./configure --enable-shared --prefix=/usr/local --enable-optimizations
         make -j$(nproc)
 
@@ -38,7 +41,15 @@ COMPILE_PYTHON39(){
 }
 
 
-##CHECK GCC version 
+gcc_version=$(gcc -dumpversion | cut -f1 -d.)
+
+# Check if the version is greater than 7
+if [ "$gcc_version" -ge 11 ]; then
+        echo "GCC version is >= 11 (version $gcc_version)."
+else
+        echo "GCC version is < 11 (version $gcc_version). scl enable devtoolset-11 bash"
+fi
+
 
 mkdir -p ./pkgs_compiled
 
