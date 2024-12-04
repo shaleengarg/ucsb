@@ -45,6 +45,7 @@ mkdir -p ./pkgs_compiled
 pushd pkgs_compiled
 
 COMPILE_SWIG
+source ~/.bashrc
 COMPILE_PYTHON39
 
 popd
