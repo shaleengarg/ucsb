@@ -51,9 +51,15 @@ is_python39_installed() {
 # Compile and install SWIG
 compile_swig() {
         sudo yum install -y pcre2-devel
-        wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz -O swig.tar.gz
 
-        tar -xf swig.tar.gz
+        # Download only if the tar file does not already exist
+        if [ ! -f swig.tar.gz ]; then
+                wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz -O swig.tar.gz
+        else
+                echo "SWIG tar file already exists. Skipping download."
+        fi
+
+        tar --overwrite -xf swig.tar.gz
         pushd ./swig-4.1.1
         ./autogen.sh
         ./configure
@@ -67,12 +73,16 @@ compile_swig() {
 # Compile and install Python 3.9.9
 compile_python39() {
         sudo yum install -y libffi-devel
-        wget https://www.python.org/ftp/python/3.9.9/Python-3.9.9.tgz
-        tar -xf Python-3.9.9.tgz
+
+        # Download only if the tar file does not already exist
+        if [ ! -f Python-3.9.9.tgz ]; then
+                wget https://www.python.org/ftp/python/3.9.9/Python-3.9.9.tgz
+        else
+                echo "Python 3.9 tar file already exists. Skipping download."
+        fi
+        tar --overwrite -xf Python-3.9.9.tgz
 
         pushd Python-3.9.9
-
-        make clean -j
 
         CFLAGS="-fPIC" ./configure --enable-shared --prefix=/usr/local --enable-optimizations
         make -j$(nproc)
