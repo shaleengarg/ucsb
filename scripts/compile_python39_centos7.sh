@@ -104,6 +104,7 @@ else
 fi
 
 update_paths
+source ~/.bashrc
 
 # Create a directory for compiled packages
 mkdir -p ./pkgs_compiled
