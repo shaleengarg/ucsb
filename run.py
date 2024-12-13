@@ -18,10 +18,10 @@ Note there are some databases and sizes commented by default just to minimize th
 """
 
 db_names = [
-    "ustore",
+    #"ustore",
     "rocksdb",
-    "leveldb",
-    "wiredtiger",
+    #"leveldb",
+    #"wiredtiger",
     # "mongodb",
     # "redis",
     # "lmdb",
