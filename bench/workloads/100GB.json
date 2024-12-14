@@ -2,11 +2,11 @@
     {
         "name": "Init",
         "records_count": 5000000,
-        "operations_count": 500,
+        "operations_count": 5000,
         "value_length": 32768,
         "bulk_load_proportion": 1.0,
-        "bulk_load_min_length": 10000,
-        "bulk_load_max_length": 10000
+        "bulk_load_min_length": 1000,
+        "bulk_load_max_length": 1000
     },
     {
         "name": "Read",
