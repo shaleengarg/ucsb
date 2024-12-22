@@ -203,7 +203,9 @@ inline worker_t::key_generator_t worker_t::create_key_generator(workload_t const
                                                                 workload.start_key + workload.records_count - 1);
         break;
     case distribution_kind_t::zipfian_k: {
+        //THIS IS CALLED
         size_t new_keys = (size_t)(workload.operations_count * workload.upsert_proportion * 2);
+        //printf("%s: start_key:%ld, records_count:%ld, new_keys:%ld\n", __func__, workload.start_key, workload.records_count, new_keys);
         generator = std::make_unique<core::scrambled_zipfian_generator_t>(workload.start_key,
                                                                           workload.start_key + workload.records_count +
                                                                               new_keys - 1);
@@ -308,10 +310,12 @@ inline worker_t::length_generator_t worker_t::create_range_select_length_generat
 }
 
 inline key_t worker_t::generate_key() {
+        //THIS IS CALLED
     key_t key = 0;
     do {
         key = key_generator_->generate();
     } while (key > upsert_key_sequence_generator->last());
+    //fprintf(stderr, "%s: key:%ld\n", __func__, key);
     return key;
 }
 

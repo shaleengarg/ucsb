@@ -235,6 +235,7 @@ operation_result_t rocksdb_t::remove(key_t key) {
 }
 
 operation_result_t rocksdb_t::read(key_t key, value_span_t value) const {
+    //fprintf(stderr, "get:%ld\n", key);
     rocksdb::PinnableSlice data;
     rocksdb::Status status = db_->Get(read_options_, cf_handles_.front(), to_slice(key), &data);
     if (status.IsNotFound())
