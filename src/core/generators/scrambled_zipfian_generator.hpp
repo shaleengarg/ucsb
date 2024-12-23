@@ -15,8 +15,8 @@ class scrambled_zipfian_generator_t : public generator_gt<size_t> {
         : base_(min), num_items_(max - min + 1),
           //generator_(0, 10'000'000'000LL, zipfian_generator_t::zipfian_const_k, zetan_k) {
           //generator_(0, num_items_, zipfian_generator_t::zipfian_const_k, zetan_k) {
-          generator_(min, max, zipfian_generator_t::zipfian_const_k, zetan_k) {
-                printf("%s: called with min:%ld, max:%ld\n", __func__, min, max);
+          generator_(min, max+1, zipfian_generator_t::zipfian_const_k, zetan_k) {
+                //printf("%s: called with min:%ld, max:%ld\n", __func__, min, max);
           }
 
     inline scrambled_zipfian_generator_t(size_t num_items) : scrambled_zipfian_generator_t(0, num_items - 1) {}
