@@ -19,6 +19,7 @@
 #include "src/core/generators/scrambled_zipfian_generator.hpp"
 #include "src/core/generators/skewed_zipfian_generator.hpp"
 #include "src/core/generators/acknowledged_counter_generator.hpp"
+#include "src/core/generators/beta_generator.hpp"
 
 namespace ucsb {
 
@@ -196,6 +197,7 @@ inline operation_result_t worker_t::do_scan() {
 inline worker_t::key_generator_t worker_t::create_key_generator(workload_t const& workload,
                                                                 core::counter_generator_t& counter_generator) {
     key_generator_t generator;
+    key_generator_t test_generator;
     switch (workload.key_dist) {
     case distribution_kind_t::uniform_k:
         generator =
@@ -209,6 +211,8 @@ inline worker_t::key_generator_t worker_t::create_key_generator(workload_t const
         generator = std::make_unique<core::scrambled_zipfian_generator_t>(workload.start_key,
                                                                           workload.start_key + workload.records_count +
                                                                               new_keys - 1);
+
+        test_generator = std::make_unique<core::beta_generator_t>(workload.start_key, workload.start_key + workload.records_count + new_keys - 1);
         break;
     }
     case distribution_kind_t::skewed_latest_k:
