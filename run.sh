@@ -18,7 +18,7 @@ declare -a thread_arr=("16")
 declare -a config_arr=("vanilla")
 declare -a mem_budget_percent_arr=("100" "80" "70" "60" "50" "40" "30" "20" "15" "10") ## Available Memory left in the system = X% of current AvailableMem
 
-SIZE="250GB"
+SIZE="120GB"
 #declare -a mem_budget_percent_arr=("80" "70" "60" "50") ## Available Memory left in the system = X% of current AvailableMem
 #declare -a mem_budget_percent_arr=("100") ## Available Memory left in the system = X% of current AvailableMem
 
@@ -53,7 +53,7 @@ RUN() {
         RESULT_FOLDER="./bench/results/cores_$THREAD/rocksdb_${MEM_BUDGET}_mb/100GB_${TRIAL}.json"
         #RESULT_FOLDER="./bench/results/cores_$THREAD/rocksdb_${mem_budget_gb}_gb/500GB_${TRIAL}.json"
         #READ_COMMAND="$UCSB -db rocksdb  -cfg ./bench/configs/rocksdb/100GB.cfg -wl ./bench/workloads/500GB.json -md ./db_main/rocksdb/500GB/ -sd $DATA_FOLDER -res $RESULT_FOLDER -th $THREAD -fl Read -ri 0 -rc 1"
-        READ_COMMAND="$UCSB -db rocksdb  -cfg ./bench/configs/rocksdb/100GB.cfg -wl ./bench/workloads/${SIZE}.json -md $METADATA_FOLDER -sd $DATA_FOLDER -res $RESULT_FOLDER -th $THREAD -fl Read -ri 0 -rc 1"
+        READ_COMMAND="$UCSB -db rocksdb  -cfg ./bench/configs/rocksdb/full.cfg -wl ./bench/workloads/${SIZE}.json -md $METADATA_FOLDER -sd $DATA_FOLDER -res $RESULT_FOLDER -th $THREAD -fl Read -ri 0 -rc 1"
 
         FlushDisk
 
