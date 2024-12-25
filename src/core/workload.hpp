@@ -91,6 +91,8 @@ inline distribution_kind_t parse_distribution(std::string const& name) {
         dist = distribution_kind_t::uniform_k;
     else if (name == "zipfian")
         dist = distribution_kind_t::zipfian_k;
+    else if (name == "beta")
+        dist = distribution_kind_t::beta_k;
     else if (name == "scrambled")
         dist = distribution_kind_t::scrambled_zipfian_k;
     else if (name == "latest")
