@@ -3,20 +3,16 @@
 #set -x
 set -e
 
-if [ -z "$BASE" ]; then
-        echo "SpeedyIO environment variables are undefined."
-        echo "Did you setvars? goto Base directory (/path/to/speedyio_release) and $ source ./scripts/setvars.sh"
-        exit 1
-fi
 
-
+source ./general_funcs.sh
 
 declare -a trials=("1")
 #declare -a thread_arr=("4" "8" "16" "32")
 #declare -a thread_arr=("16")
 declare -a thread_arr=("16")
 declare -a config_arr=("vanilla")
-declare -a mem_budget_percent_arr=("100" "80" "70" "60" "50" "40" "30" "20" "15" "10") ## Available Memory left in the system = X% of current AvailableMem
+#declare -a mem_budget_percent_arr=("100" "80" "70" "60" "50" "40" "30" "20" "15" "10") ## Available Memory left in the system = X% of current AvailableMem
+declare -a mem_budget_percent_arr=("100") # Available Memory left in the system = X% of current AvailableMem
 
 SIZE="120GB"
 #declare -a mem_budget_percent_arr=("80" "70" "60" "50") ## Available Memory left in the system = X% of current AvailableMem
@@ -32,14 +28,6 @@ UCSB="./build_release/build/bin/ucsb_bench"
 #LOAD_COMMAND="./build_release/build/bin/ucsb_bench -db rocksdb  -cfg ./bench/configs/rocksdb/100GB.cfg -wl ./bench/workloads/100GB.json -md ./db_main/rocksdb/100GB/ -sd $DATA_FOLDER -res ./bench/results/cores_16/disks_1/rocksdb/100GB.json -th $THREADS -fl Init -ri 0 -rc 1"
 
 #READ_COMMAND="./build_release/build/bin/ucsb_bench -db rocksdb  -cfg ./bench/configs/rocksdb/100GB.cfg -wl ./bench/workloads/100GB.json -md ./db_main/rocksdb/100GB/ -sd $DATA_FOLDER -res ./bench/results/cores_16/disks_1/rocksdb/100GB.json -th $THREADS -fl Read -ri 0 -rc 1"
-
-FlushDisk()
-{
-        sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
-        sudo sh -c "sync"
-        sudo sh -c "echo 3 > /proc/sys/vm/drop_caches"
-        sleep 3
-}
 
 RUN() {
         TRIAL=$1
@@ -77,6 +65,8 @@ RUN() {
         $BASE/scripts/numa-memory-limiting/budget_memory.sh cleanup
 }
 
+
+check_ulimit
 
 for tr in "${trials[@]}"; do
         for th in "${thread_arr[@]}"; do
