@@ -16,8 +16,9 @@ declare -a trials=("1")
 #declare -a thread_arr=("16")
 declare -a thread_arr=("16")
 declare -a config_arr=("vanilla")
-#declare -a mem_budget_percent_arr=("100" "50" "40" "30" "20" "15" "10" "8") ## Available Memory left in the system = X% of current AvailableMem
-declare -a mem_budget_percent_arr=("100") ## Available Memory left in the system = X% of current AvailableMem
+#declare -a mem_budget_percent_arr=("100" "80" "50" "40" "30" "20" "15" "10") ## Available Memory left in the system = X% of current AvailableMem
+declare -a mem_budget_percent_arr=("80" "70" "60" "50") ## Available Memory left in the system = X% of current AvailableMem
+#declare -a mem_budget_percent_arr=("100") ## Available Memory left in the system = X% of current AvailableMem
 
 
 DATA_FOLDER="$HOME/ssd/data/rocksdb/100GB"
