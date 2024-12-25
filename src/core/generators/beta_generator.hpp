@@ -53,8 +53,8 @@ namespace ucsb::core {
         /*
         printf("%s: called with min:%ld, max:%ld, nr_keys:%ld, alpha:%f, beta:%f\n",
                 __func__, min, max, nr_keys, alpha, beta);
+                */
 
-        */
         alpha_ = alpha;
         beta_ = beta;
         min_ = min;

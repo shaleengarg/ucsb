@@ -13,7 +13,7 @@
         "records_count": 4000000,
         "operations_count": 40000000,
         "read_proportion": 1.0,
-        "key_dist": "zipfian",
+        "key_dist": "beta",
         "value_length": 32768
     },
     {
