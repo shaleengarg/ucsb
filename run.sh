@@ -10,11 +10,13 @@ declare -a trials=("1")
 #declare -a thread_arr=("4" "8" "16" "32")
 #declare -a thread_arr=("16")
 declare -a thread_arr=("16")
-declare -a config_arr=("vanilla")
+#declare -a config_arr=("vanilla" "noet" "et_lru")
+declare -a config_arr=("et_pvt_lru")
+#declare -a config_arr=("vanilla" "et_pvt_lru")
 #declare -a mem_budget_percent_arr=("100" "80" "70" "60" "50" "40" "30" "20" "15" "10") ## Available Memory left in the system = X% of current AvailableMem
 declare -a mem_budget_percent_arr=("100") # Available Memory left in the system = X% of current AvailableMem
 
-SIZE="120GB"
+SIZE="250GB"
 #declare -a mem_budget_percent_arr=("80" "70" "60" "50") ## Available Memory left in the system = X% of current AvailableMem
 #declare -a mem_budget_percent_arr=("100") ## Available Memory left in the system = X% of current AvailableMem
 
